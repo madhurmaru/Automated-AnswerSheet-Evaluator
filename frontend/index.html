@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnswerSheet Evaluator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <main class="container">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">NLP Powered Evaluation</p>
+          <h1>AnswerSheet Evaluator</h1>
+        </div>
+        <button id="logoutBtn" class="btn ghost hidden">Logout</button>
+      </header>
+
+      <div id="globalStatus" class="status info hidden">
+        <span id="statusSpinner" class="spinner hidden"></span>
+        <span id="statusText">Ready</span>
+      </div>
+
+      <section class="card auth" id="loginCard">
+        <h2>Teacher Login</h2>
+        <p class="subtle">Sign in to create assessments and evaluate answer sheets.</p>
+        <form id="loginForm" class="form-grid">
+          <input id="username" value="teacher" placeholder="Username" required />
+          <input id="password" value="teacher123" type="password" placeholder="Password" required />
+          <button id="loginBtn" class="btn" type="submit">Login</button>
+        </form>
+        <p id="loginStatus" class="muted"></p>
+      </section>
+
+      <section id="dashboard" class="hidden">
+        <div class="layout">
+          <section class="card">
+            <h2>Exam Setup</h2>
+            <div class="form-grid two">
+              <input id="examTitle" placeholder="Assessment title" />
+              <button id="createExamBtn" class="btn">Create Assessment</button>
+            </div>
+
+            <div class="form-grid two">
+              <select id="examSelect"></select>
+              <button id="loadExamBtn" class="btn secondary">Load</button>
+            </div>
+
+            <div class="upload-grid">
+              <label class="upload-box">
+                <span>Question Paper (PDF/Image)</span>
+                <input id="questionPaperInput" type="file" />
+              </label>
+              <button id="uploadQuestionPaperBtn" class="btn secondary">Upload Question Paper</button>
+
+              <label class="upload-box">
+                <span>Marking Scheme (PDF/Image)</span>
+                <input id="markingSchemeInput" type="file" />
+              </label>
+              <button id="uploadMarkingSchemeBtn" class="btn secondary">Upload & Parse Marking Scheme</button>
+            </div>
+
+            <h3>Parsed Questions</h3>
+            <div id="questionsList" class="questions-list empty">No questions parsed yet.</div>
+          </section>
+
+          <section class="card">
+            <div class="section-head">
+              <h2>Answer Sheets</h2>
+              <button id="exportExcelBtn" class="btn secondary">Export Excel</button>
+            </div>
+            <div class="form-grid three">
+              <input id="studentName" placeholder="Student name" />
+              <input id="answerSheetInput" type="file" />
+              <button id="uploadSheetBtn" class="btn">Upload Sheet</button>
+            </div>
+
+            <div class="table-wrap">
+              <table id="sheetsTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>OCR Status</th>
+                    <th>Confidence</th>
+                    <th>Score</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <section class="card hidden" id="resultCard">
+          <div class="result-header">
+            <div>
+              <h2 id="resultTitle">Evaluation Report</h2>
+              <p id="resultSubtitle" class="subtle"></p>
+            </div>
+            <div class="score-pill">
+              <p id="resultTotal">0</p>
+              <span id="resultTotalMax">/ 0</span>
+            </div>
+          </div>
+
+          <div id="resultMeta" class="result-meta"></div>
+
+          <div class="table-wrap">
+            <table id="resultTable">
+              <thead>
+                <tr>
+                  <th>Q#</th>
+                  <th>Question</th>
+                  <th>Student Answer</th>
+                  <th>Rubric/Model</th>
+                  <th>Scores</th>
+                  <th>Marks</th>
+                  <th>Feedback</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
